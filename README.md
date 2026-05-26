@@ -1,1 +1,1 @@
-# A chess game made using python library
+# chess in python!
