@@ -1,20 +1,20 @@
 import pygame
 
 pygame.init()
-screen = pygame.display.set_mode((800, 800))
+screen = pygame.display.set_mode((736, 736))
 w, h = screen.get_size()
 clock = pygame.time.Clock()
 running = True
 
 boardImg = pygame.image.load("images/board.png").convert_alpha()
-boardImg = pygame.transform.scale(boardImg, (w, h))
+boardImg = pygame.transform.scale(boardImg, (736, 736))
 
 pygame.display.set_caption("Chess")
 pygame.display.set_icon(pygame.image.load("images/white-knight.png"))
 
 # Preloading #
 
-SQUARE_SIZE = 105
+SQUARE_SIZE = 90
 PIECE_IMAGES = {}
 
 def load_images(square_size):
@@ -52,7 +52,8 @@ board = [
 
 # Game Functions #
 def convert(i, j):
-    return [(j*(h/8.1)) + 53, (i*(w/8.1)) + 53]
+    #return [(j*(h/8)) + 53, (i*(w/8)) + 53]
+    return [(8+45)+(90*j),(8+45)+(90*i)]
 
 def DrawBoard(__board__):
     for i, row in enumerate(__board__):
