@@ -31,19 +31,50 @@ load_images(SQUARE_SIZE)
 
 # Game Structure #
 
-turn = 0 # 0 is player white, 1 is player black #
+Black = {
+    "turn" : False,
+    "inCheck" : False,
+}
+
+White = {
+    "turn" : True,
+    "inCheck" : False,
+}
 
 class Piece:
     def __init__(self, color, type):
         self.color = color
         self.type = type
+        self.pos = []
+
+    def get_moves(self, board):
+        assert self.pos is not None, "Piece has no valid position"
+
+        match self.type:
+            case "rook":
+                moves = []
+                for i in range(self.pos[0], 8, 1):
+                    moves.append([i, self.pos[1]])
+                return []
+            case "bishop":
+                return []
+            case "knight":
+                return []
+            case "queen":
+                return []
+            case "king":
+                return []
+            case "pawn":
+                return []
+
+
 
 board = [
     [Piece("black","rook"), Piece("black","knight"), Piece("black","bishop"), Piece("black","queen"), Piece("black","king"), Piece("black","bishop"), Piece("black","knight"), Piece("black","rook")],
     [Piece("black","pawn"), Piece("black","pawn"),   Piece("black","pawn"),   Piece("black","pawn"),  Piece("black","pawn"), Piece("black","pawn"),   Piece("black","pawn"),  Piece("black","pawn")],
     [None, None, None, None, None, None, None, None],
     [None, None, None, None, None, None, None, None],
-    [None, None, None, None, None, Piece("white", "rook"), None, None],
+    [None, None, None, None, None, None, None, None],
     [None, None, None, None, None, None, None, None],
     [Piece("white","pawn"), Piece("white","pawn"),   Piece("white","pawn"),   Piece("white","pawn"),  Piece("white","pawn"), Piece("white","pawn"),   Piece("white","pawn"),  Piece("white","pawn")],
     [Piece("white","rook"), Piece("white","knight"), Piece("white","bishop"), Piece("white","queen"), Piece("white","king"), Piece("white","bishop"), Piece("white","knight"), Piece("white","rook")],
@@ -60,8 +91,8 @@ def DrawBoard(__board__):
         for j, piece in enumerate(row):
             if not piece: continue
             key = piece.color + "-" + piece.type
-            piece.pos = convert(i, j) 
-            rect = PIECE_IMAGES[key].get_rect(center=piece.pos)
+            piece.pos = [i, j] 
+            rect = PIECE_IMAGES[key].get_rect(center=convert(i, j))
             screen.blit(PIECE_IMAGES[key], rect)
 
 while(running):
